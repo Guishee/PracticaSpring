@@ -1,9 +1,8 @@
 package demoSpringJPA.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class CourseMaterial {
@@ -11,6 +10,9 @@ public class CourseMaterial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @JsonIgnore
+    @OneToOne
+    private Course course;
 
     private String url;
 
@@ -20,6 +22,14 @@ public class CourseMaterial {
     public CourseMaterial(long id, String url) {
         this.id = id;
         this.url = url;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public long getId() {

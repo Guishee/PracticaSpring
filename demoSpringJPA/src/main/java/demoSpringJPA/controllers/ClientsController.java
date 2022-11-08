@@ -1,6 +1,7 @@
 package demoSpringJPA.controllers;
 
 import demoSpringJPA.entities.Course;
+import demoSpringJPA.entities.CourseMaterial;
 import demoSpringJPA.repositoris.CourseMaterialRepository;
 import demoSpringJPA.repositoris.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +32,24 @@ public class ClientsController {
 
 		return student;
 	}
-	@GetMapping("course/{id}")//busca cursos por id
+	@GetMapping("course/{id}")//busca por id
 	public Course getCourse(@PathVariable long id){
-		Course curso= courseRep.findById(id).get();
-		return curso;
+		Course cursos= courseRep.findById(id).get();
+		return cursos;
 	}
 	@GetMapping("course/all")
 	public List<Course> getCourses(){
 		return (List<Course>) courseRep.findAll();
 	}
 
+	@GetMapping("course/material")
+	public List<CourseMaterial> getCourseMat(){
+		return (List<CourseMaterial>) couseMatRep.findAll();
+	}
+	@GetMapping("course/material/{id}")
+	public CourseMaterial getCourseMat(@PathVariable long id){
+		CourseMaterial cm= couseMatRep.findById(id).get();
+		return cm;
+	}
 
 }

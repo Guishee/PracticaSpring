@@ -1,9 +1,6 @@
 package demoSpringJPA.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Course {
@@ -13,12 +10,23 @@ public class Course {
 
     private String titulo;
 
+    @OneToOne(mappedBy = "course")
+    private CourseMaterial courseMaterial;
+
     public Course(long id, String titulo) {
         this.id = id;
         this.titulo = titulo;
     }
 
     public Course() {
+    }
+
+    public CourseMaterial getCourseMaterial() {
+        return courseMaterial;
+    }
+
+    public void setCourseMaterial(CourseMaterial courseMaterial) {
+        this.courseMaterial = courseMaterial;
     }
 
     public long getId() {

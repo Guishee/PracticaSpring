@@ -10,8 +10,9 @@ public class CourseMaterial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     private Course course;
 
     private String url;

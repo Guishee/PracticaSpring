@@ -1,6 +1,9 @@
 package demoSpringJPA.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Course {
@@ -10,8 +13,9 @@ public class Course {
 
     private String titulo;
 
-    @OneToOne(mappedBy = "course")
-    private CourseMaterial courseMaterial;
+
+    @OneToMany(mappedBy = "course")
+    private List<CourseMaterial> courseMaterial;
 
     public Course(long id, String titulo) {
         this.id = id;
@@ -21,11 +25,11 @@ public class Course {
     public Course() {
     }
 
-    public CourseMaterial getCourseMaterial() {
+    public List<CourseMaterial> getCourseMaterial() {
         return courseMaterial;
     }
 
-    public void setCourseMaterial(CourseMaterial courseMaterial) {
+    public void setCourseMaterial(List<CourseMaterial> courseMaterial) {
         this.courseMaterial = courseMaterial;
     }
 

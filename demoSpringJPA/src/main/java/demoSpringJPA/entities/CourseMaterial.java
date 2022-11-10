@@ -3,6 +3,7 @@ package demoSpringJPA.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class CourseMaterial {
@@ -11,8 +12,10 @@ public class CourseMaterial {
     private long id;
 
 
+
+
+    @ManyToOne(optional = true)
     @JsonIgnore
-    @ManyToOne
     private Course course;
 
     private String url;

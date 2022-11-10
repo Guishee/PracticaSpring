@@ -1,6 +1,7 @@
 package demoSpringJPA.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,7 +15,7 @@ public class Course {
     private String titulo;
 
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<CourseMaterial> courseMaterial;
 
     public Course(long id, String titulo) {

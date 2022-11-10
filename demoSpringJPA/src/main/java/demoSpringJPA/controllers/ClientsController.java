@@ -4,11 +4,9 @@ import demoSpringJPA.entities.Course;
 import demoSpringJPA.entities.CourseMaterial;
 import demoSpringJPA.repositoris.CourseMaterialRepository;
 import demoSpringJPA.repositoris.CourseRepository;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import demoSpringJPA.entities.Student;
 import demoSpringJPA.repositoris.ClientsRepository;
@@ -35,6 +33,7 @@ public class ClientsController {
 	@GetMapping("course/{id}")//busca por id
 	public Course getCourse(@PathVariable long id){
 		Course cursos= courseRep.findById(id).get();
+		System.out.println("EAGER o LAZY");
 		return cursos;
 	}
 	@GetMapping("course/all")
@@ -50,6 +49,12 @@ public class ClientsController {
 	public CourseMaterial getCourseMat(@PathVariable long id){
 		CourseMaterial cm= couseMatRep.findById(id).get();
 		return cm;
+	}
+	@GetMapping("delete/course/{id}")
+	public void delCourse(@PathVariable long id){
+		courseRep.deleteById(id);
+
+		System.out.println("Se ha borrado el curso con id: "+ id);
 	}
 
 }

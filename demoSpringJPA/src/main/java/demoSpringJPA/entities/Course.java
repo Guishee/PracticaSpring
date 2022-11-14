@@ -15,7 +15,7 @@ public class Course {
     private String titulo;
 
 
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, orphanRemoval = false)
     private List<CourseMaterial> courseMaterial;
 
     public Course(long id, String titulo) {
@@ -29,6 +29,8 @@ public class Course {
     public List<CourseMaterial> getCourseMaterial() {
         return courseMaterial;
     }
+
+
 
     public void setCourseMaterial(List<CourseMaterial> courseMaterial) {
         this.courseMaterial = courseMaterial;
@@ -48,6 +50,15 @@ public class Course {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public void addCourseMat(CourseMaterial cm){
+        courseMaterial.add(cm);
+        cm.setCourse(this);
+    }
+    public void removeCourseMat(CourseMaterial cm){
+        courseMaterial.remove(cm);
+        cm.setCourse(null);
     }
 
     @Override

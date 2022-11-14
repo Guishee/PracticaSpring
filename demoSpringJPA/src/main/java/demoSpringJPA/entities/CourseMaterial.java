@@ -15,6 +15,7 @@ public class CourseMaterial {
 
 
     @ManyToOne(optional = true)
+    @JoinColumn(name = "COURSE_ID", nullable = true)
     @JsonIgnore
     private Course course;
 
@@ -50,6 +51,9 @@ public class CourseMaterial {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+    public void courseSetNull(){
+        course=null;
     }
 
     @Override

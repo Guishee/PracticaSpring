@@ -50,11 +50,20 @@ public class ClientsController {
 		CourseMaterial cm= couseMatRep.findById(id).get();
 		return cm;
 	}
-	@GetMapping("delete/course/{id}")
-	public void delCourse(@PathVariable long id){
-		courseRep.deleteById(id);
+	@GetMapping("delete/course/{id}")//Con esto me ha ayudado el 8a por si algunas lineas de codigo se parecen
+	public void delCourse(@PathVariable long id){//he tomado referencia en su codigo
+		if(courseRep.existsById(id)){
+			Course del=courseRep.findById(id).get();
 
-		System.out.println("Se ha borrado el curso con id: "+ id);
+			for(int j=0; j<del.getCourseMaterial().size();j++){
+				del.getCourseMaterial().get(j).courseSetNull();
+			}
+
+			courseRep.deleteById(id);
+			System.out.println("Se ha eliminado el curso");
+		}
+
+
 	}
 
 }

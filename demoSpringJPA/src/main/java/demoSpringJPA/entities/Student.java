@@ -1,11 +1,12 @@
 package demoSpringJPA.entities;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.*;
 
 @Entity
 public class Student { //Plain Old Java Object (POJO)
@@ -17,7 +18,22 @@ public class Student { //Plain Old Java Object (POJO)
 	private String cognoms;
 	private LocalDate Birth_Date;
 	private boolean newsletter;
-	
+
+	@ManyToMany
+			@JoinTable(
+					name="course_like",
+					joinColumns = @JoinColumn(name="student_id"),
+					inverseJoinColumns = @JoinColumn(name="course_id"))
+	private Set<Course> likedCourses;
+
+	public Set<Course> getLePertenecen() {
+		return likedCourses;
+	}
+
+	public void setLePertenecen(Set<Course> lePertenecen) {
+		this.likedCourses = lePertenecen;
+	}
+
 	public Student() { //constructor sense arguments
 	}
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class CourseMaterial {
@@ -18,6 +19,8 @@ public class CourseMaterial {
     @JoinColumn(name = "COURSE_ID", nullable = true)
     @JsonIgnore
     private Course course;
+
+
 
     private String url;
 

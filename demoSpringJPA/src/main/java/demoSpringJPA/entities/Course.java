@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Course {
@@ -17,6 +18,17 @@ public class Course {
 
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, orphanRemoval = false)
     private List<CourseMaterial> courseMaterial;
+
+    @ManyToMany(mappedBy = "likedCourses")
+    private Set<Student> likes;
+
+    public Set<Student> getPerteneceA() {
+        return likes;
+    }
+
+    public void setPerteneceA(Set<Student> perteneceA) {
+        this.likes = perteneceA;
+    }
 
     public Course(long id, String titulo) {
         this.id = id;
